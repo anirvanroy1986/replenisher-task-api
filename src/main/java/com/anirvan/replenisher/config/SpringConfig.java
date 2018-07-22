@@ -28,8 +28,8 @@ public class SpringConfig {
 
     @Bean
     public MongoClient mongoDbFactory() throws Exception {
-        MongoCredential credential = MongoCredential.createCredential("", "", "".toCharArray());
-        return new MongoClient(new MongoClientURI(new String()));
+        MongoCredential credential = MongoCredential.createCredential(user, db, password.toCharArray());
+        return new MongoClient(new MongoClientURI(url));
 
     }
 
