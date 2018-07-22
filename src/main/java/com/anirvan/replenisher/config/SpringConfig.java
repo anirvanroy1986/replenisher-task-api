@@ -1,26 +1,36 @@
 package com.anirvan.replenisher.config;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.MongoCredential;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 
 @Configuration
 public class SpringConfig {
 
-    @Bean
-    public MongoDbFactory mongoDbFactory() throws Exception {
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        return new SimpleMongoDbFactory(mongoClient, "test");
-    }
+    @Value("${com.anirvan.db.port}")
+    private String port;
+
+    @Value("${com.anirvan.db.user}")
+    private String user;
+
+
+    @Value("${com.anirvan.db.password}")
+    private String password;
+
+    @Value("${com.anirvan.db.db}")
+    private String db;
+
+    @Value("${com.anirvan.db.url}")
+    private String url;
 
     @Bean
-    public MongoTemplate mongoTemplate() throws Exception {
-
-        MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
-        return mongoTemplate;
+    public MongoClient mongoDbFactory() throws Exception {
+        MongoCredential credential = MongoCredential.createCredential("", "", "".toCharArray());
+        return new MongoClient(new MongoClientURI(new String()));
 
     }
+
 }
